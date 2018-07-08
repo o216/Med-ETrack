@@ -17,7 +17,7 @@ contract Med_ETrack {
    }
 
    function verify(address patient, address caregiver) view internal returns(bool){
-      return caregiversMap[caregiver] && patientsMap[patient].caregivers[caregiver]; 
+      return careGiversMap[caregiver] && patientsMap[patient].caregivers[caregiver]; 
    }
 
    event AddedPatient(address patient);
@@ -86,7 +86,7 @@ contract Med_ETrack {
    function removePatient(address _patient){
       require(!strcmp(patientsMap[_patient].name,""));
       Patient memory empty;
-      patientsMap[_patients] = empty;
+      patientsMap[_patient] = empty;
 
       emit RemovedPatient(_patient);
    }
@@ -97,7 +97,7 @@ contract Med_ETrack {
       require(careGiversMap[_caregiver]);
       careGiversMap[_caregiver] = false;
 
-      emit RemovedPatient(_patient);
+      emit RemovedPatient(_caregiver);
    }
      
    // Helpers
