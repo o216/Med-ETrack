@@ -1,0 +1,22 @@
+{
+  "fitbit": {
+    "appUUID": "040076f0-9856-466a-81b3-bbca57537838",
+    "appType": "app",
+    "appDisplayName": "Med-ETrack",
+    "iconFile": "resources/icon.png",
+    "wipeColor": "#00bcd4",
+    "requestedPermissions": [
+      "access_internet",
+      "run_background"
+    ],
+    "buildTargets": [
+      "higgs",
+      "meson"
+    ],
+    "i18n": {
+      "en": {
+        "name": "Med-ETrack"
+      }
+    }
+  }
+}
