@@ -83,7 +83,7 @@ contract Med_ETrack {
 
    event RemovedPatient(address _patient);
    
-   function removePatient(address _patient){
+   function removePatient(address _patient) public {
       require(!strcmp(patientsMap[_patient].name,""));
       Patient memory empty;
       patientsMap[_patient] = empty;
@@ -93,11 +93,11 @@ contract Med_ETrack {
 
    event RemovedCareGiver(address _caregiver);
    
-   function removeCareGiver(address _caregiver){
+   function removeCareGiver(address _caregiver) public {
       require(careGiversMap[_caregiver]);
       careGiversMap[_caregiver] = false;
 
-      emit RemovedPatient(_caregiver);
+      emit RemovedCareGiver(_caregiver);
    }
      
    // Helpers
@@ -115,10 +115,6 @@ contract Med_ETrack {
 
    function getCareGiver(address _caregiver) public view returns(bool){
       return careGiversMap[_caregiver];
-   }
-
-   function hasMedication(address _patient, string _med) public view returns(string){
-      return patientsMap[_patient].medications[_med].name;
    }
 
 }
