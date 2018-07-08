@@ -87,7 +87,7 @@ contract Med_ETrack {
 
    event RemovedPatient(address _patient);
    
-   function removePatient(){
+   function removePatient() public {
       require(!strcmp(patientsMap[msg.sender].name,""));
       Patient memory empty;
       patientsMap[msg.sender] = empty;
@@ -97,7 +97,7 @@ contract Med_ETrack {
 
    event RemovedCareGiver(address _caregiver);
    
-   function removeCareGiver(){
+   function removeCareGiver() public {
       require(careGiversMap[msg.sender]);
       careGiversMap[msg.sender] = false;
 
