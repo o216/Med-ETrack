@@ -1,0 +1,23 @@
+<svg>
+  <rect id="background" x="0" y="0" width="100%" height="100%" fill="fb-cyan"/>
+  
+  <defs>
+    <symbol id="custom-textarea" type="dynamic-textarea" system-events="all">
+      <textarea id="text" fill="white" text-anchor="middle" x="0" y="0" width="100%" font-size="25" />
+      <rect x="0" y="$+15" width="100%" height="2" />
+    </symbol>
+  </defs>
+
+  <use id="label" href="#custom-textarea" x="10" y="30" width="100%-20">
+    <set href="text" attributeName="text-buffer" to="Application is currently loading, please standby" />
+  </use>
+  
+  <use id="button" href="#square-button" y="68%" fill="fb-black">
+    <set href="#text" attributeName="text-buffer" to="Pill Taken?" />
+  </use>
+  <text id="hours" x="33%" y="55%" class="defaultText">--</text>
+  <text id="colon1" x="43%" y="55%"class="defaultText">:</text>
+  <text id="minutes" x="45%" y="55%"class="defaultText">--</text>
+  <text id="colon2" x="55%" y="55%"class="defaultText">:</text>
+  <text id="seconds" x="57%" y="55%"class="defaultText">--</text>
+</svg>
