@@ -22,82 +22,86 @@ contract Med_ETrack {
 
    event AddedPatient(address patient);
 
-   function newPatient(address sender, string _name) public {
+   function newPatient(string _name) public {
       //if patient not in map then add patient
-      require(strcmp(patientsMap[sender].name,""));
+      require(strcmp(patientsMap[msg.sender].name,""));
       Patient memory patient;
       patient.name = _name;
-      patientsMap[sender] = patient;
+      patientsMap[msg.sender] = patient;
 
-      emit AddedPatient(sender);
+      emit AddedPatient(msg.sender);
    } 
 
    event AddedCareGiver(address sender);
    
-   function newCareGiver(address sender) public {
+   function newCareGiver() public {
       //if caregiver not in map then add caregiver
-      require(!careGiversMap[sender]);
-      careGiversMap[sender] = true;
+      require(!careGiversMap[msg.sender]);
+      careGiversMap[msg.sender] = true;
 
-      emit AddedCareGiver(sender);
+      emit AddedCareGiver(msg.sender);
    }
 
    event AddedCareGiverToPatient(address caregiver, address Patient);
 
-   function addCareGiverToPatient(address _caregiver, address _patient) public {
+   function addCareGiverToPatient( address _patient) public {
       // if sender is a caretaker and patient exits
       // then add caretaker to patient.careGivers
-      require(!verify(_patient, _caregiver));
-      patientsMap[_patient].caregivers[_caregiver] = true;
+      require(!verify(_patient, msg.sender));
+      patientsMap[_patient].caregivers[msg.sender] = true;
 
-      emit AddedCareGiverToPatient(_caregiver, _patient);
+      emit AddedCareGiverToPatient(msg.sender, _patient);
    }
 
    event RemovedCareGiverToPatient(address caregiver, address _patient);
    
-   function removeCareGiverFromPatient(address _caregiver, address _patient) public {
-     require(verify(_patient, _caregiver));
-     patientsMap[_patient].caregivers[_caregiver] = false;
+   function removeCareGiverFromPatient( address _patient) public {
+     require(verify(_patient, msg.sender));
+     patientsMap[_patient].caregivers[msg.sender] = false;
+     
+     emit RemovedCareGiverToPatient(msg.sender, _patient);
    }
 
    event AddedMedicationToPatient(address _caregiver, address _patient,
 				  string _med, uint _dosage);
    
-   function addMedicationToPatient(address _caregiver, address _patient, string _med, uint _dosage) public {
-      require(verify(_patient, _caregiver));
+   function addMedicationToPatient(address _patient, string _med, uint _dosage) public {
+      require(verify(_patient, msg.sender));
 
       Medication memory med;
       med.rate_dosage;
       patientsMap[_patient].medications[_med] = med;
 
-      emit AddedMedicationToPatient(_caregiver, _patient, _med, _dosage);
+      emit AddedMedicationToPatient(msg.sender, _patient, _med, _dosage);
    }
 
    event RemovedMedicationToPatient(address _caregiver, address _patient,
-				  string _med, uint _dosage);
-   function removeMediacationFromPatient(address _caregiver, address _patient, string _med) public {
-      require(verify(_patient,_caregiver)
+				  string _med);
+   function removeMediacationFromPatient( address _patient, string _med) public {
+      require(verify(_patient,msg.sender)
 	      && patientsMap[_patient].medications[_med].rate_dosage != 0);
       patientsMap[_patient].medications[_med].rate_dosage = 0;
+      
+      emit RemovedMedicationToPatient(msg.sender, _patient, _med);
    }
 
    event RemovedPatient(address _patient);
    
-   function removePatient(address _patient) public {
-      require(!strcmp(patientsMap[_patient].name,""));
+   function removePatient() public {
+      require(!strcmp(patientsMap[msg.sender].name,""));
       Patient memory empty;
-      patientsMap[_patient] = empty;
+      patientsMap[msg.sender] = empty;
 
-      emit RemovedPatient(_patient);
+      emit RemovedPatient(msg.sender);
    }
 
    event RemovedCareGiver(address _caregiver);
    
-   function removeCareGiver(address _caregiver) public {
-      require(careGiversMap[_caregiver]);
-      careGiversMap[_caregiver] = false;
+   function removeCareGiver() public {
+      require(careGiversMap[msg.sender]);
+      careGiversMap[msg.sender] = false;
 
-      emit RemovedCareGiver(_caregiver);
+      emit RemovedPatient(msg.sender);
    }
      
    // Helpers
