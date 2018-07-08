@@ -1,5 +1,5 @@
-var SimpleStorage = artifacts.require("./SimpleStorage.sol");
+var Med_E = artifacts.require("Med_ETrack");
 
 module.exports = function(deployer) {
-  deployer.deploy(SimpleStorage);
+    deployer.deploy(Med_E);
 };
