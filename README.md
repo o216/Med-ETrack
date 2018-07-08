@@ -14,4 +14,4 @@ It uses Ethereum to store caretaker-patient interactions on a public ledger addi
 
 ## More info:
 
-This repository hosts only the Ethereum portion of the project. However, you can see the web app associated with it: https://github.com/o216/Med-ETrack-WebApp
+This repository hosts the FitBit and Ethereum portion of the project. You can see the web app associated with it: https://github.com/o216/Med-ETrack-WebApp
