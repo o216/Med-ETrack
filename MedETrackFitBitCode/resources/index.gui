@@ -1,0 +1,11 @@
+<svg>
+  <text id="label" x="0" y="72%" class="defaultText">label</text>
+  <use id="button" href="#square-button" y="5" fill="fb-red">
+    <set href="#text" attributeName="text-buffer" to="Pill Taken" />
+  </use>
+  <text id="hours" x="35%">00</text>
+  <text id="colon1" x="45%">:</text>
+  <text id="minutes" x="47%">00</text>
+  <text id="colon2" x="57%">:</text>
+  <text id="seconds" x="59%">00</text>
+</svg>
